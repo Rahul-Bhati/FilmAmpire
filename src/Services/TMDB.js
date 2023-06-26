@@ -1,8 +1,6 @@
-// here all call from TMDB api located.
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// etmake esay api request
+
 const tmdbApiKey = process.env.REACT_APP_TMDB_KEY;
-// const page = 1;
 
 // /movie/popular?api_key=API_KEY_HERE&language=en-US&page=1
 
@@ -12,16 +10,16 @@ export const tmdbApi = createApi({
   endpoints: (builder) => ({
     //* Get Genres
     getGenres: builder.query({
-      query: () => `genre/movie/list?api_key=${tmdbApiKey}`,
+      query: () => `https://api.themoviedb.org/3/genre/movie/list?api_key=${tmdbApiKey}`,
     }),
 
     //* Get Movies by {Type}
     getMovies: builder.query({
-      query: ({ genreIdOrCategoryName, page }) => {
+      query: ({ genreIdOrCategoryName, page, searchQuery }) => {
         //* Get movies by Search
-        // if (searchQuery) {
-        //   return `movie/movie?query=${searchQuery}&page=${page}&api_key=${tmdbApiKey}`;
-        // }
+        if (searchQuery) {
+          return `search/movie?query=${searchQuery}&page=${page}&api_key=${tmdbApiKey}`;
+        }
 
         //* Get movies by category
         if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'string') {
@@ -40,4 +38,7 @@ export const tmdbApi = createApi({
   }),
 });
 
-export const { useGetMoviesQuery, useGetGenresQuery } = tmdbApi;
+export const {
+  useGetGenresQuery,
+  useGetMoviesQuery,
+} = tmdbApi;
