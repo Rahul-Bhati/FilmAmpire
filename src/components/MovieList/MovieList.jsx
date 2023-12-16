@@ -6,7 +6,7 @@ import { Movie } from '../index';
 
 export default function MovieList({ movies }) {
   const classes = useStyles();
-  console.log('movies list');
+  // console.log('movies list');
 
   return (
     <Grid container className={classes.moviesContainer}>

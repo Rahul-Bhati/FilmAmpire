@@ -20,7 +20,7 @@ function Movies() {
     searchQuery,
   });
 
-  console.log(data);
+  // console.log(data);
 
   if (isFetching) {
     return (
