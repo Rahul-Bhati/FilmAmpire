@@ -1,5 +1,7 @@
+import { createRoot } from 'react-dom/client';
+
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom'; // ReactDOM.render is not use above 17 version
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -8,7 +10,21 @@ import App from './components/App';
 
 const theme = createTheme({});
 
-ReactDOM.render(
+const domNode = document.getElementById('root');
+const root = createRoot(domNode);
+
+// ReactDOM.render(
+{ /* <Provider store={store}>
+  <ThemeProvider theme={theme}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ThemeProvider>
+</Provider>,
+  document.getElementById('root'),
+); */ }
+
+root.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <BrowserRouter>
@@ -16,5 +32,4 @@ ReactDOM.render(
       </BrowserRouter>
     </ThemeProvider>
   </Provider>,
-  document.getElementById('root'),
 );
